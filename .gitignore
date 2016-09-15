@@ -20,7 +20,6 @@ web/sites/*/private
 # NPM & Bower.
 /node_modules
 npm-debug.log
-/bower_libraries
 
 # We absolutely don't want to have the .sass-cache in git.
 .sass-cache
