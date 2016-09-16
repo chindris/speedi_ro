@@ -20,6 +20,7 @@
     "gulp-sourcemaps": ">=1.6.0"
   },
   "dependencies": {
+    "animate.scss": ">=0.0.6",
     "autoprefixer": ">=6.0.0",
     "breakpoint-sass": ">=2.7.0",
     "css-mqpacker": ">=5.0.1",
