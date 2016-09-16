@@ -16,37 +16,33 @@
     "js-yaml": ">=3.6.1",
     "jshint": ">=2.8.0",
     "jshint-stylish": ">=2.0.1",
-    "pngquant-bin": ">=3.0.0"
+    "pngquant-bin": ">=3.0.0",
+    "gulp-sourcemaps": ">=1.6.0"
   },
   "dependencies": {
-    "animate.scss": ">=0.0.6",
     "autoprefixer": ">=6.0.0",
-    "bower": ">=1.6.5",
     "breakpoint-sass": ">=2.7.0",
     "css-mqpacker": ">=5.0.1",
     "csswring": ">=5.1.0",
     "gulp": ">=3.9.1",
     "gulp-css-globbing": ">=0.1.8",
-    "gulp-environments": ">=0.1.1",
-    "gulp-if": ">=2.0.1",
     "gulp-postcss": ">=6.0.1",
     "gulp-sass": ">=2.0.4",
-    "gulp-sourcemaps": ">=1.6.0",
     "gulp-util": ">=3.0.6",
-    "stream-browserify": ">=2.0.1",
-    "susy": ">=2.2.12"
+    "susy": ">=2.2.12",
+    "stream-browserify": ">=2.0.1"
   },
   "scripts": {
     "gulp": "gulp"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AmazeeLabs/d8-starter-composer.git"
+    "url": "https://github.com/AmazeeLabs/d8-starter.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AmazeeLabs/d8-starter-composer/issues"
+    "url": "https://github.com/AmazeeLabs/d8-starter/issues"
   },
-  "homepage": "https://github.com/AmazeeLabs/d8-starter-composer"
+  "homepage": "https://github.com/AmazeeLabs/d8-starter"
 }

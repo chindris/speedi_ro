@@ -35,8 +35,7 @@ var gulp          = require('gulp'),
     postcss       = require('gulp-postcss'),
     autoprefixer  = require('autoprefixer'),
     mqpacker      = require('css-mqpacker'),
-    csswring      = require('csswring'),
-    sourcemaps    = require('gulp-sourcemaps');
+    csswring      = require('csswring');
 
 /* Check local env */
 var dev = util.env.env != 'prod' ? true : false;
@@ -49,6 +48,7 @@ if( dev ) {
       filter        = require('gulp-filter'),
       colors        = require('colors'),
       jshint        = require('gulp-jshint'),
+      sourcemaps    = require('gulp-sourcemaps'),
       fs            = require('fs'),
       duration      = require('gulp-duration'),
       imagemin      = require('gulp-imagemin'),
