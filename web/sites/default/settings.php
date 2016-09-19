@@ -25,6 +25,9 @@
  *
  */
 
+// Drupal needs to know the installation profile.
+$settings['install_profile'] = 'config_installer';
+
 ### amazee.io Database connection
 if(getenv('AMAZEEIO_SITENAME')){
   $databases['default']['default'] = array(
