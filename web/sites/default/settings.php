@@ -18,9 +18,9 @@
  *   For settings only for the development environment (devevlopment sites, docker).
  * - development.services.yml
  *   For services only for the development environment (devevlopment sites, docker).
- * - settings.local.php
+ * - local.settings.php
  *   For settings only for the local environment, this file will not be commited in GIT!
- * - services.local.yml
+ * - local.services.yml
  *   For services only for the local environment, this file will not be commited in GIT!
  *
  */
@@ -107,10 +107,10 @@ if(getenv('AMAZEEIO_SITE_ENVIRONMENT')){
 }
 
 // Last: this servers specific settings files.
-if (file_exists(__DIR__ . '/settings.local.php')) {
-  include __DIR__ . '/settings.local.php';
+if (file_exists(__DIR__ . '/local.settings.php')) {
+  include __DIR__ . '/local.settings.php';
 }
 // Last: This server specific services file.
-if (file_exists(__DIR__ . '/services.local.yml')) {
-  $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
+if (file_exists(__DIR__ . '/local.services.yml')) {
+  $settings['container_yamls'][] = __DIR__ . '/local.services.yml';
 }
