@@ -90,6 +90,7 @@ if (file_exists(__DIR__ . '/all.settings.php')) {
 }
 
 // Services for all environments
+$settings['container_yamls'][] = __DIR__ . '/services.yml';
 if (file_exists(__DIR__ . '/all.services.yml')) {
   $settings['container_yamls'][] = __DIR__ . '/all.services.yml';
 }
