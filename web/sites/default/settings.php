@@ -42,7 +42,7 @@ if(getenv('AMAZEEIO_SITENAME')){
 }
 
 ### amazee.io Solr connection
-// WARNING: you have to create a search_api server having "backend_config" machine name at
+// WARNING: you have to create a search_api server having "solr" machine name at
 // /admin/config/search/search-api/add-server to make this work.
 if (getenv('AMAZEEIO_SOLR_HOST') && getenv('AMAZEEIO_SOLR_PORT')) {
   $config['search_api.server.solr']['backend_config']['host'] = getenv('AMAZEEIO_SOLR_HOST');
