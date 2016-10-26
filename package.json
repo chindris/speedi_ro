@@ -11,13 +11,14 @@
     "gulp-iconfont": ">=8.0.1",
     "gulp-imagemin": ">=2.4.0",
     "gulp-jshint": ">=1.11.2",
+    "gulp-sourcemaps": ">=1.6.0",
+    "imagemin-gifsicle": "^5.1.0",
     "imagemin-pngquant": ">=4.2.0",
     "imagemin-svgo": ">=4.1.2",
     "js-yaml": ">=3.6.1",
     "jshint": ">=2.8.0",
     "jshint-stylish": ">=2.0.1",
-    "pngquant-bin": ">=3.0.0",
-    "gulp-sourcemaps": ">=1.6.0"
+    "pngquant-bin": ">=3.0.0"
   },
   "dependencies": {
     "autoprefixer": ">=6.0.0",
