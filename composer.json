@@ -22,7 +22,7 @@
         },
         {
             "type": "composer",
-            "url": "https://packagist.drupal-composer.org"
+            "url": "https://packages.drupal.org/8"
         }
     ],
     "require": {
@@ -32,20 +32,20 @@
         "drupal/core": "~8.0",
         "drush/drush": "~8.0",
         "drupal/console": "~1.0",
-        "drupal/admin_toolbar": "~8.0",
-        "drupal/ctools": "~8.0",
-        "drupal/devel": "~8.0",
-        "drupal/field_group": "~8.0",
-        "drupal/layout_plugin": "~8.0",
-        "drupal/link_css": "~8.0",
-        "drupal/metatag": ">8.1.0-beta10",
-        "drupal/page_manager": "~8.0",
-        "drupal/paragraphs": "~8.0",
-        "drupal/pathauto": "~8.0",
-        "drupal/redirect": "~8.0",
-        "drupal/token": "~8.0",
-        "drupal/entity_reference_revisions": "~8.0",
-        "drupal/config_installer": "~8.0",
+        "drupal/admin_toolbar": "~1.0",
+        "drupal/ctools": "~3.0",
+        "drupal/devel": "~1.0",
+        "drupal/field_group": "~1.0",
+        "drupal/layout_plugin": "~1.0",
+        "drupal/link_css": "~1.0",
+        "drupal/metatag": ">1.0-beta10",
+        "drupal/page_manager": "~1.0",
+        "drupal/paragraphs": "~1.0",
+        "drupal/pathauto": "~1.0",
+        "drupal/redirect": "~1.0",
+        "drupal/token": "~1.0",
+        "drupal/entity_reference_revisions": "~1.0",
+        "drupal/config_installer": "~1.0",
         "drupal/varnish": "dev-amazee"
     },
     "conflict": {
