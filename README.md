@@ -60,7 +60,7 @@ Example:
 
 After a new patch is added run
 - `composer install` to apply patch
-- `composer update nothing` to make `composer-patches` plugin write necessary changes to the `composer.lock` file
+- `composer update --lock` to make `composer-patches` plugin write necessary changes to the `composer.lock` file
 
 ### Installing custom/forked modules from Github repository
 
