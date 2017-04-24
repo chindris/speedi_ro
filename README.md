@@ -127,8 +127,7 @@ Example: https://github.com/AmazeeLabs/d8-starter-composer/commit/cbe1481
 ### Update existing Drupal 8 project to use composer
 
 You will need:
-- Move files around, setup composer stuff (better to view in a desktop app because of huge commit diffs)
-  - BackThursday video: https://youtu.be/QsxHAo4J69A?t=30s
+- Move files around, setup composer stuff
   - Step by step guide: https://www.amazeelabs.com/node/1300#migrate-to-composer
   - Hepler script for git submodules: https://github.com/AmazeeLabs/scripts/blob/master/Drupal/git-submodules-to-composer-require.php
 - Ask @devops to update environment(s) configuration and deloyment script as for composer-based project
