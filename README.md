@@ -116,8 +116,6 @@ Use `composer require drupal/<MODULE_NAME>:dev-amazee#<COMMIT_HASH>` to add the 
 
 Most of libraries can be added easily with composer. The tricky part is that most of Drupal modules require that libraries are saved under `libraries` directory while Composer installs them to `vendor`. The `composer/installers` can override package paths, but only for packages that depend on it. So, you'll need to write (or override) the `composer.json` file of the library stating that it has `composer/installers` dependency.
 
-Example: https://github.com/AmazeeLabs/heks_ch/commit/e9b1aeb
-
 ### Switch a dependency package to a forked version
 
 1. Add the forked repository to the `composer.json`
@@ -129,7 +127,7 @@ Example: https://github.com/AmazeeLabs/d8-starter-composer/commit/cbe1481
 ### Update existing Drupal 8 project to use composer
 
 You will need:
-- Move files around, setup composer stuff, example: https://github.com/AmazeeLabs/heks_ch/compare/5a5af8c...031914d (better to view in a desktop app because of huge commit diffs)
+- Move files around, setup composer stuff (better to view in a desktop app because of huge commit diffs)
   - BackThursday video: https://youtu.be/QsxHAo4J69A?t=30s
   - Step by step guide: https://www.amazeelabs.com/node/1300#migrate-to-composer
   - Hepler script for git submodules: https://github.com/AmazeeLabs/scripts/blob/master/Drupal/git-submodules-to-composer-require.php
