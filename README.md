@@ -64,7 +64,7 @@ After a new patch is added run
 
 ### Installing custom/forked modules from Github repository
 
-#### For the case if module reposiroty contains its own `composer.json`
+#### For the case if module repository contains its own `composer.json`
 
 ```
     "repositories": [
@@ -78,7 +78,7 @@ After a new patch is added run
 
 Use `composer require drupal/<MODULE_NAME>:dev-<BRANCH_NAME>#<COMMIT_HASH>` to add the module.
 
-#### For the case if `composer.json` is missing in the module reposiroty
+#### For the case if `composer.json` is missing in the module repository
 
 ```
     "repositories": [
