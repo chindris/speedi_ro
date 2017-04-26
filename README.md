@@ -116,6 +116,8 @@ Use `composer require drupal/<MODULE_NAME>:dev-amazee#<COMMIT_HASH>` to add the 
 
 Most of libraries can be added easily with composer. The tricky part is that most of Drupal modules require that libraries are saved under `libraries` directory while Composer installs them to `vendor`. The `composer/installers` can override package paths, but only for packages that depend on it. So, you'll need to write (or override) the `composer.json` file of the library stating that it has `composer/installers` dependency.
 
+Example diff: https://gist.github.com/Leksat/d4ffca138a6608e6c00d6bf1917ee826
+
 ### Switch a dependency package to a forked version
 
 1. Add the forked repository to the `composer.json`
