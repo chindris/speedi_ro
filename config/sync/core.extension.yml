@@ -44,6 +44,7 @@ module:
   pathauto: 1
   views: 10
   config_installer: 1000
+profile: config_installer
 theme:
   classy: 0
   seven: 0
