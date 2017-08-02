@@ -17,10 +17,6 @@
             }
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/AmazeeLabs/composer-patches"
-        },
-        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
@@ -28,7 +24,7 @@
     "require": {
         "composer/installers": "^1.0.20",
         "drupal-composer/drupal-scaffold": "^2.0.1",
-        "cweagans/composer-patches": "dev-amazee",
+        "cweagans/composer-patches": "~1.0",
         "drupal/core": "~8.0",
         "drush/drush": "~8.0",
         "drupal/console": "~1.0",

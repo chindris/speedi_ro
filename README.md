@@ -6,10 +6,6 @@ The starter lives at http://d8-starter-composer.io.dev.dev1.compact.amazee.io/ (
 
 How to setup a new project from d8-starter-composer: http://confluence.amazeelabs.com/display/KNOWLEDGE/Create+new+Drupal+8+Composer+project
 
-## Todo
-
-- Switch `cweagans/composer-patches` to original repository once [#46](https://github.com/cweagans/composer-patches/pull/46) and [#57](https://github.com/cweagans/composer-patches/pull/57) get in.
-
 ## Recipes
 
 The most recent version of the following recipes can be found at https://github.com/AmazeeLabs/d8-starter-composer#readme
