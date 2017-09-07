@@ -4173,7 +4173,7 @@ supports-color@^3.2.3:
   dependencies:
     has-flag "^1.0.0"
 
-susy@>=2.2.12:
+susy@~2.2.5:
   version "2.2.12"
   resolved "https://registry.yarnpkg.com/susy/-/susy-2.2.12.tgz#644c2441ed00d293287e8d49a016dbf919215953"
 
