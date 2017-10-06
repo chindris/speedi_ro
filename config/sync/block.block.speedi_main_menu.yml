@@ -1,0 +1,24 @@
+uuid: 8cc90c84-8851-4e7e-b982-37963f49f4d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - speedi
+id: speedi_main_menu
+theme: speedi
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+visibility: {  }

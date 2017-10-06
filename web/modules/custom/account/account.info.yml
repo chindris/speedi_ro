@@ -1,0 +1,5 @@
+name: Account
+type: module
+description: 'Implements some customizations related to user accounts.'
+package: Custom
+core: 8.x

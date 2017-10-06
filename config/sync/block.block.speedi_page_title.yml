@@ -1,0 +1,18 @@
+uuid: fa8c5bc3-63db-433d-8727-fe8d455375fe
+langcode: en
+status: true
+dependencies:
+  theme:
+    - speedi
+id: speedi_page_title
+theme: speedi
+region: content
+weight: -50
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

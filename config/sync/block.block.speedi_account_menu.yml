@@ -1,0 +1,24 @@
+uuid: 4fc08a16-f9b3-4c71-a594-05ad1d62cec2
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - speedi
+id: speedi_account_menu
+theme: speedi
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+visibility: {  }

@@ -1,0 +1,20 @@
+uuid: dadfbeca-9235-4cf2-ab00-871dfa9f3d47
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - speedi
+id: speedi_messages
+theme: speedi
+region: header
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

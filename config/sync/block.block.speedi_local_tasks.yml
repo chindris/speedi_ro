@@ -1,0 +1,20 @@
+uuid: 3abb214a-2733-4368-82c0-d29341c7ed47
+langcode: en
+status: true
+dependencies:
+  theme:
+    - speedi
+id: speedi_local_tasks
+theme: speedi
+region: content
+weight: -40
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

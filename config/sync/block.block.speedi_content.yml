@@ -1,0 +1,20 @@
+uuid: 098b7de3-c39b-49f0-9cbc-67eab8d8216c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - speedi
+id: speedi_content
+theme: speedi
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

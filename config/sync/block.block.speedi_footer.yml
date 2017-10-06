@@ -1,0 +1,24 @@
+uuid: 548a222f-5f00-4229-b976-36f55c110c21
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - speedi
+id: speedi_footer
+theme: speedi
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }
