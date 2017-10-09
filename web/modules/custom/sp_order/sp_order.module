@@ -1,0 +1,245 @@
+<?php
+
+/**
+ * @file
+ * Implements some customizations for the order content type.
+ */
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function sp_order_node_presave(\Drupal\node\Entity\Node $node) {
+  // For new orders, if the user is authenticated, then we directly set them as
+  // confirmed.
+  if ($node->isNew() && $node->bundle() == 'sp_order') {
+    $author = $node->getRevisionUser();
+    if ($author->isAuthenticated()) {
+      $node->set('field_order_confirmed', 1);
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function sp_order_module_implements_alter(&$implementations, $hook) {
+  // We need our form alter hooks to run at the end.
+  if ($hook == 'form_alter') {
+    $group = $implementations['sp_order'];
+    unset($implementations['sp_order']);
+    $implementations['sp_order'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Dummy form alter hook, otherwise the module_implements_alter() will not work.
+ * We will just keep this emtpy hook until a better solution will be found.
+ */
+function sp_order_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function sp_order_form_node_sp_order_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // When the current user is anonymous, we want to have the email field
+  // required. For the case when the user is logged in, we actually want to have
+  // the field hidden.
+  // @todo: alter also the node edit form!
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $form['field_email']['widget'][0]['value']['#required'] = TRUE;
+  }
+  $form['actions']['submit']['#submit'][] = 'sp_order_node_sp_order_form_submit_redirect';
+  sp_order_sp_order_form_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function sp_order_form_node_sp_order_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  sp_order_form_node_sp_order_form_alter($form, $form_state, $form_id);
+}
+
+/*
+ * Performs common alterations for the node order form (add and edit).
+ */
+function sp_order_sp_order_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = 'sp_order_form_submit_preserve_hash';
+}
+
+/**
+ * Submit handler that will set the order hash in the current request upon a
+ * form submission.
+ */
+function sp_order_node_sp_order_form_submit_redirect(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $node = \Drupal\node\Entity\Node::load($form_state->get('nid'));
+  if (!empty($node)) {
+    sp_order_set_order_hash_in_request($node);
+    $form_state->setRedirect("entity.node.canonical", array('node' => $node->id()));
+  }
+}
+
+/**
+ * Additional submit handler for the order node form.
+ */
+function sp_order_form_submit_preserve_hash(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Preserve the order_hash if we have it in the query.
+  $order_hash = \Drupal::request()->get('order_hash');
+  if (!empty($order_hash)) {
+    $redirect = $form_state->getRedirect();
+    if (!empty($redirect) && $redirect instanceof \Drupal\Core\Url) {
+      $query = $redirect->getOption('query');
+      $query['order_hash'] = $order_hash;
+      $redirect->setOption('query', $query);
+    }
+  }
+}
+
+/**
+ * Helper function to compute the hash for an order.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *  The order node.
+ */
+function sp_order_get_hash_for_order(\Drupal\node\NodeInterface $node) {
+  $data = $node->id() . '-' . $node->getCreatedTime();
+  return \Drupal\Component\Utility\Crypt::hashBase64($data, \Drupal\Core\Site\Settings::getHashSalt());
+}
+
+/**
+ * Helper function to set the hash of an order in the current request.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *  The order node.
+ * @param boolean $force_set
+ *  If we should force set the order hash, even if we already have a value.
+ */
+function sp_order_set_order_hash_in_request(\Drupal\node\NodeInterface $node, $force_set = FALSE) {
+  // First, make sure we do not already have one. If we do have one, just skip
+  // setting it again.
+  $order_hash = \Drupal::request()->get('order_hash');
+  if (empty($order_hash) || $force_set) {
+    \Drupal::request()->query->set('order_hash', sp_order_get_hash_for_order($node));
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function sp_order_menu_local_tasks_alter(&$data, $route_name) {
+  // If we are on a node route, keep the order_hash query parameter for all the
+  // tabs.
+  if (strpos($route_name, 'entity.node.') === 0) {
+    $order_hash = \Drupal::request()->get('order_hash');
+    if (!empty($order_hash)) {
+      foreach ($data['tabs'] as $index => $routes) {
+        foreach ($routes as $route_key => $route_info) {
+          if (strpos($route_key, 'entity.node.') === 0) {
+            $query = $route_info['#link']['url']->getOption('query');
+            $query['order_hash'] = $order_hash;
+            $route_info['#link']['url']->setOption('query', $query);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * @todo: this needs massive refactoring, too much complicated logic here, hard
+ * to test.
+ */
+function sp_order_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account) {
+  // For orders, any user which has the special link with the hash in it has
+  // access to view, edit or delete. The same for the order item nodes.
+  // @todo: the service providers to which this node is assigned also have
+  // access to view it.
+  // @todo: we should maybe remove the order item nodes and just use a custom
+  // field. But it is true that the system is much more flexible with nodes.
+  // Some for deleting. When we implement this, then we can update the
+  // permissions.
+  if ($op == 'update' || $op == 'view' || ($op == 'delete' && $node->bundle() != 'sp_order')) {
+    $node_to_check = NULL;
+    switch ($node->bundle()) {
+      // For order item nodes, we actually have to check the access to their
+      // parent order.
+      case 'sp_order_item': {
+        try {
+          $node_to_check = sp_order_get_order_from_order_item($node);
+        }
+        catch (\InvalidArgumentException $e) {
+          // Do nothing special here, maybe just log it? @todo
+        }
+        break;
+      }
+      case 'sp_order': {
+        $node_to_check = $node;
+        break;
+      }
+    }
+
+    if (!empty($node_to_check)) {
+      $hash = \Drupal::request()->get('order_hash');
+      $valid_hash = sp_order_get_hash_for_order($node_to_check);
+      if ($hash === $valid_hash) {
+        return \Drupal\Core\Access\AccessResult::allowed();
+      }
+
+      // @todo: Remove this return.
+      return \Drupal\Core\Access\AccessResult::neutral();
+
+      // If the user is the service provider, we allow him to view or edit the
+      // order in some circumstances.
+      if ($account->isAuthenticated() && $node->bundle() == 'sp_order') {
+        try {
+          $service_provider = $node_to_check->get('field_service_provider')->referencedEntities();
+          if (!empty($service_provider) && $service_provider[0]->id() == $account->id()) {
+            // The service provider can always see the order for now. We should
+            // maybe change this that he can see it only after the order was
+            // submitted to him.
+            if ($op == 'view') {
+              return \Drupal\Core\Access\AccessResult::allowed();
+            }
+            elseif ($op == 'update') {
+              /* @var \Drupal\content_moderation\StateTransitionValidationInterface $state_transition_service */
+              $state_transition_service = \Drupal::service('content_moderation.state_transition_validation');
+              $transitions = $state_transition_service->getValidTransitions($node_to_check, $account);
+              if (!empty($transitions)) {
+                return \Drupal\Core\Access\AccessResult::allowed();
+              }
+            }
+          }
+        }
+        catch (\InvalidArgumentException $e) {
+          // Do nothing special here, maybe just log it? @todo
+        }
+      }
+    }
+  }
+  return \Drupal\Core\Access\AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_field_access().
+ */
+function sp_order_entity_field_access($operation, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, \Drupal\Core\Session\AccountInterface $account, \Drupal\Core\Field\FieldItemListInterface $items = NULL) {
+  switch ($field_definition->getName()) {
+    case 'comment':
+    case 'revision_log': {
+      // Also, deny the access to the comment field setting on the node edit
+      // form, as well as to the revision log field. For the comments field, we
+      // do not want to remove it from the content type form display
+      // configuration, admins should still see that field.
+      if ($operation == 'edit' && !$account->hasPermission('administer nodes')) {
+        return \Drupal\Core\Access\AccessResult::forbidden();
+      }
+      break;
+    }
+  }
+  return \Drupal\Core\Access\AccessResult::neutral();
+}

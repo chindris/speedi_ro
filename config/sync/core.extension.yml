@@ -1,10 +1,12 @@
 module:
+  account: 0
   admin_toolbar: 0
   admin_toolbar_tools: 0
   block: 0
   block_content: 0
   breakpoint: 0
   ckeditor: 0
+  collapsible_comments: 0
   config: 0
   config_translation: 0
   contextual: 0
@@ -28,8 +30,10 @@ module:
   path: 0
   rdf: 0
   redirect: 0
+  sp_order: 0
   system: 0
   taxonomy: 0
+  telephone: 0
   text: 0
   token: 0
   toolbar: 0
@@ -38,6 +42,7 @@ module:
   views_ui: 0
   menu_link_content: 1
   pathauto: 1
+  content_translation: 10
   views: 10
   config_installer: 1000
 profile: config_installer

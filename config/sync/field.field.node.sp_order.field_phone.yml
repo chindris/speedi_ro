@@ -1,0 +1,21 @@
+uuid: a0f666b7-068c-4409-bc05-392900ce4674
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_phone
+    - node.type.sp_order
+  module:
+    - telephone
+id: node.sp_order.field_phone
+field_name: field_phone
+entity_type: node
+bundle: sp_order
+label: Phone
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

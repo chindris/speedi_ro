@@ -1,0 +1,19 @@
+uuid: 1a81dfe7-c8c3-4ce4-b8ad-7cd0b4bd22cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.sp_order
+  module:
+    - user
+id: node.sp_order.teaser
+targetEntityType: node
+bundle: sp_order
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

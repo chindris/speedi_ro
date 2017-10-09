@@ -1,0 +1,45 @@
+uuid: 421b79b6-7143-4a6a-b77b-ad6d6408c1de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sp_order.field_email
+    - field.field.node.sp_order.field_order_confirmed
+    - field.field.node.sp_order.field_phone
+    - node.type.sp_order
+  module:
+    - user
+id: node.sp_order.default
+targetEntityType: node
+bundle: sp_order
+mode: default
+content:
+  field_email:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_order_confirmed:
+    weight: 103
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_phone:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

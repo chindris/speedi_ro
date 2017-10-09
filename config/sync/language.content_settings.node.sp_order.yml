@@ -1,0 +1,11 @@
+uuid: a7b47dde-c048-4467-a0a7-8a1354a9af4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.sp_order
+id: node.sp_order
+target_entity_type_id: node
+target_bundle: sp_order
+default_langcode: current_interface
+language_alterable: false

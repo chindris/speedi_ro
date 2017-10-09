@@ -1,0 +1,23 @@
+uuid: 2289583b-2b1e-4715-bf06-0243640cf4ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_confirmed
+    - node.type.sp_order
+id: node.sp_order.field_order_confirmed
+field_name: field_order_confirmed
+entity_type: node
+bundle: sp_order
+label: 'Order confirmed'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,9 @@
+uuid: 96e388d4-a2b2-4ee5-9899-1b788d7762c8
+langcode: en
+status: true
+dependencies: {  }
+id: ro
+label: Romanian
+direction: ltr
+weight: 1
+locked: false
