@@ -20,6 +20,35 @@ function sp_order_node_presave(\Drupal\node\Entity\Node $node) {
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function sp_order_node_insert(\Drupal\node\Entity\Node $node) {
+  $confirmedOrder = $node->get('field_order_confirmed')->getValue();
+  // If the order is not confirmed, we send now the confirmation mail.
+  if (empty($confirmedOrder[0]['value'])) {
+    $params = array('node' => $node);
+    $mail = $node->get('field_email')->getValue()[0]['value'];
+    \Drupal::service('plugin.manager.mail')->mail('sp_order', 'confirmation_mail', $mail, \Drupal::languageManager()->getCurrentLanguage()->getId(), $params);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function sp_order_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'confirmation_mail': {
+      $confirmUrl = \Drupal\Core\Url::fromUserInput('/node/' . $params['node']->id() . '/confirm', ['order_hash' => sp_order_get_hash_for_order($params['node']), 'absolute' => TRUE]);
+      $message['subject'] = t('New order on @site_name', ['@site_name' => \Drupal::config('system.site')->get('name')]);
+      $message['body'][] = t('Hello,
+
+You have created a new order. Please access this link to confirm it: @order_confirm_url',
+        ['@order_confirm_url' =>  $confirmUrl]);
+    }
+  }
+}
+
+/**
  * Implements hook_module_implements_alter().
  */
 function sp_order_module_implements_alter(&$implementations, $hook) {
@@ -68,6 +97,7 @@ function sp_order_form_node_sp_order_edit_form_alter(&$form, \Drupal\Core\Form\F
  */
 function sp_order_sp_order_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = 'sp_order_form_submit_preserve_hash';
+  $form['revision_information']['#access'] = \Drupal::currentUser()->hasPermission('administer content');
 }
 
 /**
